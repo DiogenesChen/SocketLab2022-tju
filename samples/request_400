@@ -1,4 +1,5 @@
-GET /~prs/15-441-F15/ HTTP/1.1
+GET 
+/~prs/15-441-F15/ HTTP/1.1
 Host: www.cs.cmu.edu
 Connection: keep-alive
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
