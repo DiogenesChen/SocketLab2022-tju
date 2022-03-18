@@ -492,8 +492,8 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyrline[] =
 {
        0,   113,   113,   114,   117,   123,   127,   156,   157,   160,
-     163,   171,   175,   187,   191,   195,   200,   207,   222,   223,
-     226
+     163,   171,   175,   187,   191,   195,   200,   207,   230,   231,
+     234
 };
 #endif
 
@@ -1405,27 +1405,35 @@ yyreduce:
     strcpy(parsing_request->headers[parsing_request->header_count].header_name, (yyvsp[-6].str));
 	strcpy(parsing_request->headers[parsing_request->header_count].header_value, (yyvsp[-2].str));
 	parsing_request->header_count++;
+
+    if(parsing_request->header_count == parsing_request->header_capacity)
+	{
+		parsing_request->header_capacity *= 2;
+		parsing_request->headers = (Request_header *)realloc(parsing_request->headers, sizeof(Request_header *) * parsing_request->header_capacity);
+		if(parsing_request->headers == NULL)
+			fprintf(stderr, "Can not realloc\n");
+	}
 }
-#line 1410 "y.tab.c" /* yacc.c:1646  */
+#line 1418 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 223 "src/parser.y" /* yacc.c:1646  */
+#line 231 "src/parser.y" /* yacc.c:1646  */
     {}
-#line 1416 "y.tab.c" /* yacc.c:1646  */
+#line 1424 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 226 "src/parser.y" /* yacc.c:1646  */
+#line 234 "src/parser.y" /* yacc.c:1646  */
     {
 	YPRINTF("parsing_request: Matched Success.\n");
 	return SUCCESS;
 }
-#line 1425 "y.tab.c" /* yacc.c:1646  */
+#line 1433 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1429 "y.tab.c" /* yacc.c:1646  */
+#line 1437 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1653,7 +1661,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 231 "src/parser.y" /* yacc.c:1906  */
+#line 239 "src/parser.y" /* yacc.c:1906  */
 
 
 /* C code */

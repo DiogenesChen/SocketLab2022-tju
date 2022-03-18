@@ -209,6 +209,14 @@ request_header: token ows t_colon ows text ows t_crlf {
     strcpy(parsing_request->headers[parsing_request->header_count].header_name, $1);
 	strcpy(parsing_request->headers[parsing_request->header_count].header_value, $5);
 	parsing_request->header_count++;
+
+    if(parsing_request->header_count == parsing_request->header_capacity)
+	{
+		parsing_request->header_capacity *= 2;
+		parsing_request->headers = (Request_header *)realloc(parsing_request->headers, sizeof(Request_header *) * parsing_request->header_capacity);
+		if(parsing_request->headers == NULL)
+			fprintf(stderr, "Can not realloc\n");
+	}
 };
 
 

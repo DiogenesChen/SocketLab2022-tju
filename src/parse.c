@@ -1,5 +1,7 @@
 #include "parse.h"
 
+#define default_header_capacity 10
+
 /**
 * Given a char buffer returns the parsed request headers
 */
@@ -51,15 +53,23 @@ Request * parse(char *buffer, int size, int socketFd) {
 		Request *request = (Request *) malloc(sizeof(Request));
         request->header_count=0;
         //TODO You will need to handle resizing this in parser.y
-        request->headers = (Request_header *) malloc(sizeof(Request_header)*1);
+		request->header_capacity = default_header_capacity;
+		//For default capacity
+        request->headers = (Request_header *) malloc(sizeof(Request_header)*request->header_capacity);
 		set_parsing_options(buf, i, request);
 
 		if (yyparse() == SUCCESS) {
             return request;
 		}
+
+		else {
+			free(request->headers);
+			free(request);
+		}
+		//如果错误回收分配的空间
 	}
     //TODO Handle Malformed Requests
-    printf("Parsing Failed\n");
+    printf("%Parsing Failed\n");
 	return NULL;
 }
 

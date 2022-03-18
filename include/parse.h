@@ -19,6 +19,7 @@ typedef struct
 	char http_uri[4096];
 	Request_header *headers;
 	int header_count;
+	int header_capacity; // maximum capacity of headers
 } Request;
 
 Request* parse(char *buffer, int size,int socketFd);
