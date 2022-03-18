@@ -70,8 +70,6 @@ Request * parse(char *buffer, int size, int socketFd) {
 	}
     //TODO Handle Malformed Requests
     printf("Parsing Failed\n");
-	Request *request = (Request *) malloc(sizeof(Request));
-	strcpy(request->http_method, "BAAAAAD!");
-	return request;
+	return NULL;
 }
 

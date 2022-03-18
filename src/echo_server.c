@@ -89,13 +89,13 @@ int main(int argc, char* argv[])
         while((readret = recv(client_sock, buf, BUF_SIZE, 0)) >= 1)
         {
             Request *request = parse(buf, BUF_SIZE, client_sock);
-            if (!strcmp(request->http_method, "BAAAAAD!"))
+            if (request == NULL)
             {
                 char resp[64] = "HTTP/1.1 400 Bad request\r\n\r\n";
                 strcpy(buf, resp);
             }//Bad request
 
-            if (strcmp(request->http_method, "GET") && strcmp(request->http_method, "HEAD") && strcmp(request->http_method, "POST"))
+            else if (strcmp(request->http_method, "GET") && strcmp(request->http_method, "HEAD") && strcmp(request->http_method, "POST"))
             {
                 char resp[64] = "HTTP/1.1 501 Not Implemented\r\n\r\n";
                 strcpy(buf, resp);
@@ -104,6 +104,7 @@ int main(int argc, char* argv[])
             
             //encapsulation
             readret = 32 > readret ? 32 : readret;
+            //in case that the request is too short
             if (send(client_sock, buf, readret, 0) != readret)
             {
                 close_socket(client_sock);
