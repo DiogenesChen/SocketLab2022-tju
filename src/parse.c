@@ -69,7 +69,9 @@ Request * parse(char *buffer, int size, int socketFd) {
 		//如果错误回收分配的空间
 	}
     //TODO Handle Malformed Requests
-    printf("%Parsing Failed\n");
-	return NULL;
+    printf("Parsing Failed\n");
+	Request *request = (Request *) malloc(sizeof(Request));
+	strcpy(request->http_method, "BAAAAAD!");
+	return request;
 }
 
