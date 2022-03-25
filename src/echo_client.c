@@ -23,7 +23,7 @@
 #include <fcntl.h>
 
 #define ECHO_PORT 9999
-#define BUF_SIZE 4096
+#define BUF_SIZE 8192
 
 int main(int argc, char* argv[])
 {
@@ -79,11 +79,13 @@ int main(int argc, char* argv[])
     fprintf(stdout, "=====Sending=====\n");
     fprintf(stdout, "%s\n", msg);
     send(sock, msg , strlen(msg), 0);
-    if((bytes_received = recv(sock, buf, BUF_SIZE, 0)) > 1)
+    fprintf(stdout, "=====Received=====\n");
+    while(1)
     {
+        bytes_received = recv(sock, buf, BUF_SIZE, 0);
         buf[bytes_received] = '\0';
-        fprintf(stdout, "=====Received=====\n");
         fprintf(stdout, "%s\n", buf);
+        if (strlen(buf) != BUF_SIZE || buf[BUF_SIZE] == EOF) break;
     }        
 
     freeaddrinfo(servinfo);

@@ -138,7 +138,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 "\\"	{
 	/* Rule 0: Backslash */
 
-	LPRINTF("t:backslash; \n");
+	/* LPRINTF("t:backslash; \n"); */
 
 	/* Copy character to yylval.i*/
 	yylval.i = yytext[0];
@@ -153,7 +153,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 "\/"	{
 	/* Rule 1: Slash */
 
-	LPRINTF("t:slash; \n");
+	/* LPRINTF("t:slash; \n"); */
 
 	/* Copy character to yylval.i*/
 	yylval.i = yytext[0];
@@ -168,7 +168,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {crlf} {
 	/* Rule 2: CRLF */
 
-	LPRINTF("t:crlf; \n");
+	/* LPRINTF("t:crlf; \n"); */
 
 	/*
 	 * No need to communicate the value of CRLF to yacc, so no
@@ -181,7 +181,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {sp} {
 	/* Rule 3: Space */
 
-	LPRINTF("t:sp '%s'; \n", yytext);
+	/* LPRINTF("t:sp '%s'; \n", yytext); */
 
 	yylval.i = yytext[0];
 
@@ -191,7 +191,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {ws} {
 	/* Rule 4: A sequence of white spaces */
 
-	LPRINTF("t:ht; \n");
+	/* LPRINTF("t:ht; \n");*/
 
 	/* Very important to communicate the value here! */
 	strcpy(yylval.str, yytext);
@@ -202,7 +202,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {digit} {
 	/* Rule 5: A digit */
 
-	LPRINTF("t:digit %d; \n", atoi(yytext));
+	/* LPRINTF("t:digit %d; \n", atoi(yytext)); */
 
 	yylval.i = atoi(yytext);
 
@@ -212,7 +212,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 "." {
 	/* Rule 6: A dot */
 
-	LPRINTF("t:dot; \n");
+	/* LPRINTF("t:dot; \n"); */
 	yylval.i = '.';
 	return t_dot;
 }
@@ -220,7 +220,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {colon} {
 	/* Rule 7: A colon */
 
-	LPRINTF("t:colon; \n");
+	/* LPRINTF ("t:colon; \n"); */
 	yylval.i = ':';
 	return t_colon;
 }
@@ -228,7 +228,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {separators} {
 	/* Rule 8: A separator */
 
-	LPRINTF("t:separators \'%s\'\n", yytext);
+	/* LPRINTF("t:separators \'%s\'\n", yytext); */
 	yylval.i = yytext[0];
 	return t_separators;
 }
@@ -236,7 +236,7 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {token_char} {
 	/* Rule 9: A character allowed in a token */
 
-	LPRINTF("t:token_char %s\n", yytext);
+	/* LPRINTF("t:token_char %s\n", yytext);*/
 	/*
 	 * Again, it is important to communicate the value back
 	 * Otherwise, yacc has no way to know which character matched the rule
@@ -248,12 +248,12 @@ token_char      [\x0-\x7f]{-}[\x0-\x1f\x7f]{-}[\{\}\(\)\<\>@\,;:\\\"/\[\]?=\x20\
 {lws} {
 	/* Rule 10: Linear white spaces */
 
-	LPRINTF("t:lws\n");
+	/* LPRINTF("t:lws\n"); */
 	return t_lws;
 }
 
 {ctl} {
-	LPRINTF("t:ctl\n");
+	/* LPRINTF("t:ctl\n"); */
 	return t_ctl;
 }
 

@@ -2,6 +2,8 @@
 
 #define default_header_capacity 10
 
+extern yyin;
+
 /**
 * Given a char buffer returns the parsed request headers
 */
@@ -13,7 +15,7 @@ Request * parse(char *buffer, int size, int socketFd) {
 
 	int i = 0, state;
 	size_t offset = 0;
-	char ch;
+	char ch = 0;
 	char buf[8192];
 	memset(buf, 0, 8192);
 
@@ -57,6 +59,7 @@ Request * parse(char *buffer, int size, int socketFd) {
 		//For default capacity
         request->headers = (Request_header *) malloc(sizeof(Request_header)*request->header_capacity);
 		set_parsing_options(buf, i, request);
+		yyrestart(yyin);
 
 		if (yyparse() == SUCCESS) {
             return request;

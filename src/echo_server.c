@@ -18,10 +18,11 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include "parse.h"
 
 #define ECHO_PORT 9999
-#define BUF_SIZE 4096
+#define BUF_SIZE 8192
 
 extern Request* parse(char *buffer, int size,int socketFd);
 
@@ -41,7 +42,8 @@ int main(int argc, char* argv[])
     ssize_t readret;
     socklen_t cli_size;
     struct sockaddr_in addr, cli_addr;
-    char buf[BUF_SIZE];
+    char* buf = (char *)malloc(BUF_SIZE);
+    int AcaBUF_SIZE = BUF_SIZE;
 
     fprintf(stdout, "----- Echo Server -----\n");
     
@@ -86,10 +88,11 @@ int main(int argc, char* argv[])
 
         readret = 0;
 
-        while((readret = recv(client_sock, buf, BUF_SIZE, 0)) >= 1)
+        while((readret = recv(client_sock, buf, AcaBUF_SIZE, 0)) >= 1)
         {
-            Request *request = parse(buf, BUF_SIZE, client_sock);
-            if (request == NULL)
+            Request *request = (Request *) malloc(sizeof(Request));
+            request = parse(buf, BUF_SIZE, client_sock);
+            if (request == NULL || readret == BUF_SIZE)
             {
                 char resp[64] = "HTTP/1.1 400 Bad request\r\n\r\n";
                 strcpy(buf, resp);
@@ -101,18 +104,64 @@ int main(int argc, char* argv[])
                 strcpy(buf, resp);
 
             }//not implemented
-            
-            //encapsulation
-            readret = 32 > readret ? 32 : readret;
-            //in case that the request is too short
-            if (send(client_sock, buf, readret, 0) != readret)
+
+            else if (strcmp(request->http_version, "HTTP/1.1"))
+            {
+                char resp[64] = "HTTP/1.1 505 HTTP Version not supported\r\n\r\n";
+                strcpy(buf, resp);
+
+            }//Version not supported
+
+            else if (!strcmp(request->http_method, "HEAD"))
+            {
+                char resp[64] = "HTTP/1.1 200 OK\r\n";
+                strcpy(buf, resp);
+
+            }//Head method
+
+            else if (!strcmp(request->http_method, "GET"))
+            {
+                char fileAddr[64] = "/home/project-1/static_site";
+
+                if (!strcmp(request->http_uri, "/")) strcat(fileAddr, "/index.html");
+                else strcat(fileAddr, request->http_uri);
+                //uri文件位置变为服务器文件地址
+
+                int fd_in = open(fileAddr, O_RDONLY);
+
+                if(fd_in < 0) 
+                {
+                    char resp[64] = "HTTP/1.1 404 Not Found\r\n\r\n";
+                    strcpy(buf, resp);
+                }
+
+                else 
+                {
+                    while (read(fd_in,buf,AcaBUF_SIZE) == AcaBUF_SIZE)
+                    {
+                        AcaBUF_SIZE *= 2;
+                        buf = (char *)realloc(buf, AcaBUF_SIZE);
+                    }
+
+                    char* alterBuf = (char *)malloc(AcaBUF_SIZE+64);
+                    strcpy(alterBuf, "HTTP/1.1 200 OK\r\n");
+                    strcat(alterBuf, buf);
+                    buf = (char *)realloc(buf, AcaBUF_SIZE+64);
+                    strcpy(buf, alterBuf);
+                }
+            }//GET method
+
+            free(request);
+            //encapsulation     
+
+            if (send(client_sock, buf, strlen(buf), 0) != strlen(buf))
             {
                 close_socket(client_sock);
                 close_socket(sock);
                 fprintf(stderr, "Error sending to client.\n");
                 return EXIT_FAILURE;
             }
-            memset(buf, 0, BUF_SIZE);
+            memset(buf, 0, AcaBUF_SIZE);
         } 
 
         if (readret == -1)
