@@ -20,11 +20,15 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "parse.h"
+#include "log.h"
 
 #define ECHO_PORT 9999
 #define BUF_SIZE 8192
 
 extern Request* parse(char *buffer, int size,int socketFd);
+
+extern void log_write(char* msg, int length, int statCode);
+extern void error_write(char* msg);
 
 int close_socket(int sock)
 {
@@ -96,32 +100,35 @@ int main(int argc, char* argv[])
             {
                 char resp[64] = "HTTP/1.1 400 Bad request\r\n\r\n";
                 strcpy(buf, resp);
+                error_write("Bad request");
             }//Bad request
 
             else if (strcmp(request->http_method, "GET") && strcmp(request->http_method, "HEAD") && strcmp(request->http_method, "POST"))
             {
                 char resp[64] = "HTTP/1.1 501 Not Implemented\r\n\r\n";
                 strcpy(buf, resp);
-
+                error_write("Not Implemented");
             }//not implemented
 
             else if (strcmp(request->http_version, "HTTP/1.1"))
             {
                 char resp[64] = "HTTP/1.1 505 HTTP Version not supported\r\n\r\n";
                 strcpy(buf, resp);
-
+                error_write("HTTP Version not supported");
             }//Version not supported
 
             else if (!strcmp(request->http_method, "HEAD"))
             {
                 char resp[64] = "HTTP/1.1 200 OK\r\n";
                 strcpy(buf, resp);
-
+                char requestLine[64];
+                sprintf(requestLine, "%s %s %s", request->http_method, request->http_uri, request->http_version);
+                log_write(requestLine, 0, 200);
             }//Head method
 
             else if (!strcmp(request->http_method, "GET"))
             {
-                char fileAddr[64] = "/home/project-1/static_site";
+                char fileAddr[64] = "./static_site";
 
                 if (!strcmp(request->http_uri, "/")) strcat(fileAddr, "/index.html");
                 else strcat(fileAddr, request->http_uri);
@@ -133,6 +140,7 @@ int main(int argc, char* argv[])
                 {
                     char resp[64] = "HTTP/1.1 404 Not Found\r\n\r\n";
                     strcpy(buf, resp);
+                    error_write("Not Found");
                 }
 
                 else 
@@ -142,14 +150,23 @@ int main(int argc, char* argv[])
                         AcaBUF_SIZE *= 2;
                         buf = (char *)realloc(buf, AcaBUF_SIZE);
                     }
-
                     char* alterBuf = (char *)malloc(AcaBUF_SIZE+64);
                     strcpy(alterBuf, "HTTP/1.1 200 OK\r\n");
                     strcat(alterBuf, buf);
                     buf = (char *)realloc(buf, AcaBUF_SIZE+64);
                     strcpy(buf, alterBuf);
+                    char requestLine[64];
+                    sprintf(requestLine, "%s %s %s", request->http_method, request->http_uri, request->http_version);
+                    log_write(requestLine, 0, 200);
                 }
             }//GET method
+
+            else if (!strcmp(request->http_method, "POST"))
+            {
+                char requestLine[64];
+                sprintf(requestLine, "%s %s %s", request->http_method, request->http_uri, request->http_version);
+                log_write(requestLine, 0, 200);
+            }
 
             free(request);
             //encapsulation     
