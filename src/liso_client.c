@@ -23,7 +23,7 @@
 #include <fcntl.h>
 
 #define ECHO_PORT 9999
-#define BUF_SIZE 8192
+#define BUF_SIZE 998192
 
 int main(int argc, char* argv[])
 {
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
             printf("Failed to open the file\n");
             return 0;
         }
-        read(fd_in,msg,8192);
+        read(fd_in, msg, BUF_SIZE);
     }
     else fgets(msg, BUF_SIZE, stdin);
     // for file instream

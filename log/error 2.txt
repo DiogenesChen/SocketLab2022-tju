@@ -1,0 +1,126 @@
+[Wed, 30 Mar 2022 06:35:17 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:17 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:35:17 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Wed, 30 Mar 2022 06:35:18 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Wed, 30 Mar 2022 06:42:35 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ HTTP Version not supported 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Not Implemented 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Bad request 
+
+[Sat, 02 Apr 2022 08:06:41 GMT][error][client 127.0.0.1] 
+ Bad request 
+
