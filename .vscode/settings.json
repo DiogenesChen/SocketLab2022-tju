@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "cstdlib": "c",
-        "stat.h": "c"
+        "stat.h": "c",
+        "__threading_support": "c",
+        "thread": "c",
+        "iterator": "c",
+        "in.h": "c",
+        "parse.h": "c",
+        "log.h": "c"
     }
 }

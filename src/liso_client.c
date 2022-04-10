@@ -83,10 +83,10 @@ int main(int argc, char* argv[])
     while(1)
     {
         bytes_received = recv(sock, buf, BUF_SIZE, 0);
+        if (bytes_received == 0) break;
         buf[bytes_received] = '\0';
         fprintf(stdout, "%s\n", buf);
-        if (strlen(buf) != BUF_SIZE || buf[BUF_SIZE] == EOF) break;
-    }        
+    }           
 
     freeaddrinfo(servinfo);
     close(sock);    
